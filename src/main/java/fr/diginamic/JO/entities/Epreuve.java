@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,15 +31,9 @@ public class Epreuve {
 	@ManyToMany(mappedBy = "epreuves")
 	private List<Jeu> jeux = new ArrayList<Jeu>();
 	
-	/** Récupere la liste des traductions des epreuves  */
-	@ManyToMany(mappedBy = "epreuves")
-	private List<TraductionEpreuve> traductionEpreuves  = new ArrayList<TraductionEpreuve>();
-	
-	@ManyToMany
-	@JoinTable(name = "EPREUVE_MEDAILLE",
-				joinColumns = @JoinColumn(name = "ID_EPREUVE", referencedColumnName = "ID"),
-				inverseJoinColumns = @JoinColumn(name = "ID_MEDAILLE", referencedColumnName = "ID"))
-	private List<Medaille> medailles = new ArrayList<Medaille>();
+	@ManyToOne
+	@JoinColumn(name = "SPORT_ID")
+	private Sport sport;
 	
 	/** Constructeur
 	 * 
@@ -90,19 +85,18 @@ public class Epreuve {
 		return jeux;
 	}
 
-	/** Getter pour l'attribut traductionEpreuves 
-	 * @return the traductionEpreuves
+	/** Getter pour l'attribut sport 
+	 * @return the sport
 	 */
-	public List<TraductionEpreuve> getTraductionEpreuves() {
-		return traductionEpreuves;
+	public Sport getSport() {
+		return sport;
 	}
 
-	/** Getter pour l'attribut medailles 
-	 * @return the medailles
+	/** Setter pour l'attribut sport 
+	 * @param sport the sport to set
 	 */
-	public List<Medaille> getMedailles() {
-		return medailles;
+	public void setSport(Sport sport) {
+		this.sport = sport;
 	}
-	
 	
 }
