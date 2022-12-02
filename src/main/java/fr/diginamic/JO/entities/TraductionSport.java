@@ -19,13 +19,14 @@ public class TraductionSport {
 	private int id;
 
 	/** Nom d'un sport en anglais */
-	@Column(name = "LIBELLE_EN", nullable = false, length = 100)
+	@Column(name = "LIBELLE_EN", nullable = true, length = 100)
 	private String libelleSportEN;
 
 	/** Nom d'un sport en français */
-	@Column(name = "LIBELLE_FR", nullable = false, length = 100)
+	@Column(name = "LIBELLE_FR", nullable = true, length = 100)
 	private String libelleSportFR;
 
+	/** Plusieurs traduction pour un sport  */
 	@ManyToOne
 	@JoinColumn(name = "SPORT_ID")
 	private Sport sport;
@@ -49,6 +50,8 @@ public class TraductionSport {
 		this.libelleSportEN = libelleSportEN;
 		this.libelleSportFR = libelleSportFR;
 	}
+	
+	
 
 	/**
 	 * Getter pour l'attribut id
@@ -116,6 +119,11 @@ public class TraductionSport {
 	 */
 	public void setSport(Sport sport) {
 		this.sport = sport;
+	}
+
+	@Override
+	public String toString() {
+		return "TraductionSport [libelleSportEN=" + libelleSportEN + ", libelleSportFR=" + libelleSportFR + "]";
 	}
 
 }

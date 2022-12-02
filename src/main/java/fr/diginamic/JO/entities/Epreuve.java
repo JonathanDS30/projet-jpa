@@ -9,9 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,9 +31,18 @@ public class Epreuve {
 	@ManyToMany(mappedBy = "epreuves")
 	private List<Jeu> jeux = new ArrayList<Jeu>();
 	
+	/** Plusieurs epreuve pour un sport */
 	@ManyToOne
 	@JoinColumn(name = "SPORT_ID")
 	private Sport sport;
+	
+	/** Une épreuve possède possède plusieurs traduction  */
+	@OneToMany(mappedBy = "epreuve")
+	private List<TraductionEpreuve> traductionsEpreuves = new ArrayList<TraductionEpreuve>();
+	
+	/** Une epreuve distribue 1 à 3 médailles  */
+	@OneToMany(mappedBy = "epreuve")
+	private List<Medaille> medailles = new ArrayList<Medaille>();
 	
 	/** Constructeur
 	 * 
@@ -97,6 +106,34 @@ public class Epreuve {
 	 */
 	public void setSport(Sport sport) {
 		this.sport = sport;
+	}
+
+	/** Getter pour l'attribut traductionsEpreuves 
+	 * @return the traductionsEpreuves
+	 */
+	public List<TraductionEpreuve> getTraductionsEpreuves() {
+		return traductionsEpreuves;
+	}
+
+	/** Setter pour l'attribut traductionsEpreuves 
+	 * @param traductionsEpreuves the traductionsEpreuves to set
+	 */
+	public void setTraductionsEpreuves(List<TraductionEpreuve> traductionsEpreuves) {
+		this.traductionsEpreuves = traductionsEpreuves;
+	}
+
+	/** Getter pour l'attribut medailles 
+	 * @return the medailles
+	 */
+	public List<Medaille> getMedailles() {
+		return medailles;
+	}
+
+	/** Setter pour l'attribut medailles 
+	 * @param medailles the medailles to set
+	 */
+	public void setMedailles(List<Medaille> medailles) {
+		this.medailles = medailles;
 	}
 	
 }

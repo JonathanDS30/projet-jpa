@@ -2,11 +2,17 @@ package fr.diginamic.JO.entities;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +29,15 @@ public class Sport {
 	private String libelleSport;
 
 
+	/** Liste des traductions sports */
+	@OneToMany(mappedBy = "sport")
+	private List<TraductionSport> traductionSports= new ArrayList<TraductionSport>();
+	
+	/** Plusieurs epreuve pour un sport  */
+	@ManyToOne
+	@JoinColumn(name = "EPREUVE_ID")
+	private Epreuve epreuve;
+	
 	/**
 	 * Constructeur
 	 * 
@@ -77,4 +92,35 @@ public class Sport {
 	public void setLibelleSport(String libelleSport) {
 		this.libelleSport = libelleSport;
 	}
+
+	/** Getter pour l'attribut traductionSports 
+	 * @return the traductionSports
+	 */
+	public List<TraductionSport> getTraductionSports() {
+		return traductionSports;
+	}
+
+	/** Setter pour l'attribut traductionSports 
+	 * @param traductionSports the traductionSports to set
+	 */
+	public void setTraductionSports(List<TraductionSport> traductionSports) {
+		this.traductionSports = traductionSports;
+	}
+
+	/** Getter pour l'attribut epreuve 
+	 * @return the epreuve
+	 */
+	public Epreuve getEpreuve() {
+		return epreuve;
+	}
+
+	/** Setter pour l'attribut epreuve 
+	 * @param epreuve the epreuve to set
+	 */
+	public void setEpreuve(Epreuve epreuve) {
+		this.epreuve = epreuve;
+	}
+	
+	
+	
 }

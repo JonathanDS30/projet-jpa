@@ -26,6 +26,7 @@ public class TraductionEpreuve {
 	@Column(name = "EVENT_FR", nullable = false, length = 100)
 	private String libelleEpreuveFR;
 
+	/** Plusieurs traductions pour une épreuve  */
 	@ManyToOne
 	@JoinColumn(name = "EPREUVE_ID")
 	private Epreuve epreuve;
